@@ -2,18 +2,14 @@ import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLab
 import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
 import React from 'react';
 import { array, boolean, mixed, number, object, string } from 'yup';
-import { InvestmentDetails } from './InvestmentDetails';
+import { ProfileDetails } from './ProfileDetails';
 import * as Yup from 'yup';
 
-const initialValues: InvestmentDetails = {
+const initialValues: ProfileDetails = {
   fullName: '',
   email: '',
   password: '',
   passwordConfirmation: '',
-  initialInvestment: 0,
-  investmentRisk: [],
-  commentAboutInvestmentRisk: '',
-  dependents: -1,
   acceptedTermsAndConditions: false
 
 };
@@ -28,10 +24,7 @@ export function Register() {
           validationSchema={
             object({
               fullName: string().required('Your name is mandatory!!!').max(30),
-              initialInvestment: number().required().min(100),
-              dependents: number().required().min(0).max(5),
               acceptedTermsAndConditions: boolean().oneOf([true]),
-              investmentRisk: array(string().oneOf(['High', 'Medium', 'Low'])).min(1),
               email:
                 string()
                   .email("Enter a valid email")
@@ -52,11 +45,6 @@ export function Register() {
                 ),
               passwordConfirmation: string()
                 .oneOf([Yup.ref('password'), null], 'Passwords must match'),
-              commentAboutInvestmentRisk: mixed().when('investmentRisk', {
-                is: (investmentRisk: string[]) => investmentRisk.find(ir => ir === 'High'),
-                then: string().required().min(20).max(100),
-                otherwise: string().min(20).max(100)
-              })
             })
           }
           initialValues={initialValues} onSubmit={(values, formikHelpers) => {

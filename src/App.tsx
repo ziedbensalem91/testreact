@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./Login";
 import { Register } from "./Register";
 import ForgetPassword from "./ForgetPassword";
+import Crud from "./Crud";
 const Home = () => {
   return (
     <div>
@@ -18,10 +19,15 @@ const App = () => {
     <Router>
       <div>
         <Link to="/Register">Register</Link>
-<br/>
+        <br />
         <Link to="/Login">Login</Link>
-        <br/>
+        <br />
         <Link to="/ForgetPassword">Forget Password</Link>
+        <br />
+        <Link to="/Crud">Crud</Link>
+        <br />
+        <Link to={'Crud/create'}> Create Customer </Link>
+
       </div>
 
       <Switch>
@@ -33,6 +39,9 @@ const App = () => {
         </Route>
         <Route path="/ForgetPassword" exact>
           <ForgetPassword />
+        </Route>
+        <Route path="/Crud" exact>
+          <Crud />
         </Route>
       </Switch>
     </Router>

@@ -4,18 +4,14 @@ import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLab
 import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
 
 import { array, boolean, mixed, number, object, string } from 'yup';
-import { InvestmentDetails } from './InvestmentDetails';
+import { ProfileDetails } from './ProfileDetails';
 import * as Yup from 'yup';
 
-const initialValues: InvestmentDetails = {
+const initialValues: ProfileDetails = {
     fullName: '',
     email: '',
     password: '',
     passwordConfirmation: '',
-    initialInvestment: 0,
-    investmentRisk: [],
-    commentAboutInvestmentRisk: '',
-    dependents: -1,
     acceptedTermsAndConditions: false
 
 };
