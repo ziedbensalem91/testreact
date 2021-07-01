@@ -14,8 +14,9 @@
     "@types/react-dom": "^16.9.5",
     "@types/react-router-dom": "^5.1.7",
     "@types/yup": "^0.26.28",
-    "formik": "^2.1.2",
     "axios": "^0.19.2",
+    "formik": "^2.1.2",
+    "json-server": "^0.16.3",
     "next-next-link": "0.0.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -29,7 +30,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server --watch server/db.json"
   },
   "eslintConfig": {
     "extends": "react-app"
