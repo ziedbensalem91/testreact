@@ -36,3 +36,10 @@ To integrate with material-ui
 npm install --save @material-ui/core
 ```
 
+<br />
+
+To run json server
+
+```sh
+npm run server
+```
