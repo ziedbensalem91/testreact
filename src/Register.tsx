@@ -58,11 +58,13 @@ export function Register() {
             })
           }}>
           {({ values, errors, isSubmitting, isValidating }) => (
-            <Form>
+            <Form autoComplete="off">
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="fullName" as={TextField} label="Full Name" />
-                  <ErrorMessage name="fullName" />
+                  <ErrorMessage name="fullName">
+                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                  </ErrorMessage>
                 </FormGroup>
               </Box>
 
@@ -70,19 +72,25 @@ export function Register() {
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="email" as={TextField} label="Email" />
-                  <ErrorMessage name="email" />
+                  <ErrorMessage name="email">
+                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                  </ErrorMessage>
                 </FormGroup>
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="password" as={TextField} label="Password" type="password" />
-                  <ErrorMessage name="password" />
+                  <ErrorMessage name="password">
+                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                  </ErrorMessage>
                 </FormGroup>
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="passwordConfirmation" as={TextField} label="Password Confirmation" type="password" />
-                  <ErrorMessage name="passwordConfirmation" />
+                  <ErrorMessage name="passwordConfirmation">
+                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                  </ErrorMessage>
                 </FormGroup>
               </Box>
               <Box marginBottom={2}>
@@ -91,13 +99,12 @@ export function Register() {
                     name="acceptedTermsAndConditions"
                     label="Accept terms and conditions"
                   />
-                  <ErrorMessage name="acceptedTermsAndConditions" />
+                  <ErrorMessage name="acceptedTermsAndConditions">
+                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                  </ErrorMessage>
                 </FormGroup>
               </Box>
               <Button type="submit" disabled={isSubmitting || isValidating}>Register</Button>
-
-              <pre>{JSON.stringify(errors, null, 4)}</pre>
-              <pre>{JSON.stringify(values, null, 4)}</pre>
             </Form>
           )}
         </Formik>

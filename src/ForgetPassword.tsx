@@ -42,7 +42,7 @@ function ForgetPassword() {
                                         console.log(regExp.test(val), regExp, val);
                                         return regExp.test(val);
                                     }
-                                ),   
+                                ),
                         })
                     }
                     initialValues={initialValues} onSubmit={(values, formikHelpers) => {
@@ -60,15 +60,12 @@ function ForgetPassword() {
                             <Box marginBottom={2}>
                                 <FormGroup>
                                     <Field name="email" as={TextField} label="Email" />
-                                    <ErrorMessage name="email" />
+                                    <ErrorMessage name="email">
+                                        {msg => <div style={{ color: 'red' }}>{msg}</div>}
+                                    </ErrorMessage>
                                 </FormGroup>
                             </Box>
-                           
-
                             <Button type="submit" disabled={isSubmitting || isValidating}>Send password reset link</Button>
-
-                            <pre>{JSON.stringify(errors, null, 4)}</pre>
-                            <pre>{JSON.stringify(values, null, 4)}</pre>
                         </Form>
                     )}
                 </Formik>
