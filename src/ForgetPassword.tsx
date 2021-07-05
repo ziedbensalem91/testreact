@@ -65,7 +65,7 @@ function ForgetPassword() {
                                     </ErrorMessage>
                                 </FormGroup>
                             </Box>
-                            <Button type="submit" disabled={isSubmitting || isValidating}>Send password reset link</Button>
+                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Send password reset link</Button>
                         </Form>
                     )}
                 </Formik>

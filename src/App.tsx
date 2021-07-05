@@ -26,7 +26,7 @@ const App = () => {
         <br />
         <Link to="/ForgetPassword">Forget Password</Link>
         <br />
-        <Link to="/Crud">Crud</Link>
+        <Link to="/Crud">List of Customers</Link>
         <br />
         <Link to={'/create'}> Create Customer </Link>
 

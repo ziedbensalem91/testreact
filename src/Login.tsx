@@ -74,7 +74,7 @@ function Login() {
                                 </FormGroup>
                             </Box>
 
-                            <Button type="submit" disabled={isSubmitting || isValidating}>Login</Button>
+                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Login</Button>
                         </Form>
                     )}
                 </Formik>

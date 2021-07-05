@@ -18,7 +18,7 @@ export function Register() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h4">Register</Typography>
+        <Typography variant="h4" >Register</Typography>
 
         <Formik
           validationSchema={
@@ -104,7 +104,7 @@ export function Register() {
                   </ErrorMessage>
                 </FormGroup>
               </Box>
-              <Button type="submit" disabled={isSubmitting || isValidating}>Register</Button>
+              <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Register</Button>
             </Form>
           )}
         </Formik>
