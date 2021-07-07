@@ -4,10 +4,17 @@ import React from 'react';
 import { array, boolean, mixed, number, object, string } from 'yup';
 import { ProfileDetails } from './ProfileDetails';
 import * as Yup from 'yup';
+import IconButton from "@material-ui/core/IconButton";
+import InputLabel from "@material-ui/core/InputLabel";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Input from "@material-ui/core/Input";
 
 const initialValues: ProfileDetails = {
   fullName: '',
   email: '',
+  showPassword: '',
   password: '',
   passwordConfirmation: '',
   acceptedTermsAndConditions: false
@@ -15,6 +22,27 @@ const initialValues: ProfileDetails = {
 };
 
 export function Register() {
+  
+  const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false,
+  });
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setValues({ ...values, [event.target.name]: event.target.checked })
+  }
+
+  const handleClickShowPassword = (): void => {
+    setValues({ ...values, showPassword: !values.showPassword })
+  }
+
+  
+
+  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+  }
+
+  
   return (
     <Card>
       <CardContent>
@@ -79,7 +107,22 @@ export function Register() {
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="password" as={TextField} label="Password" type="password" />
+                  <Field name="password" as={TextField} label="Password" type={values.showPassword ? "text" : "password"}
+        //onChange={handleChange("password")}
+        value={values.password}
+
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+            <IconButton
+              onClick={handleClickShowPassword}
+              onMouseDown={handleMouseDownPassword}
+            >
+        {values.showPassword ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          </InputAdornment>
+          )}} />
+        
                   <ErrorMessage name="password">
                   { msg => <div style={{ color: 'red' }}>{msg}</div> }
                   </ErrorMessage>

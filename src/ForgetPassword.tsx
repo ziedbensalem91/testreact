@@ -11,6 +11,7 @@ const initialValues: ProfileDetails = {
     fullName: '',
     email: '',
     password: '',
+    showPassword: '',
     passwordConfirmation: '',
     acceptedTermsAndConditions: false
 
