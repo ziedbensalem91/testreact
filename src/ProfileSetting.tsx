@@ -6,7 +6,7 @@ import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
 import { array, boolean, mixed, number, object, string } from 'yup';
 import { ProfileDetails } from './ProfileDetails';
 import * as Yup from 'yup';
-
+import  AvatarUploader from './UploadImage';
 const initialValues: ProfileDetails = {
     fullName: '',
     email: '',
@@ -17,33 +17,20 @@ const initialValues: ProfileDetails = {
 
 };
 
-function Login() {
+function mangeProfile() {
+    
     return (
         <Card>
             <CardContent>
-                <Typography variant="h4">Login</Typography>
-
-                <Formik
+                <Typography variant="h4">Profile Setting</Typography>
+                     
+                    <AvatarUploader></AvatarUploader>
+                    <Formik
                     validationSchema={
                         object({
                             email:
-                                string()
-                                    .email("Enter a valid email")
-                                    .required("Email is required"),
+                                string().required("Name is required"),
 
-                            password: string()
-                                .required("Please Enter your password")
-                                .test(
-                                    "regex",
-                                    "Password must be min 8 characters, and have 1 Special Character, 1 Uppercase, 1 Number and 1 Lowercase",
-                                    val => {
-                                        let regExp = new RegExp(
-                                            "^(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-                                        );
-                                        console.log(regExp.test(val), regExp, val);
-                                        return regExp.test(val);
-                                    }
-                                ),
                         })
                     }
                     initialValues={initialValues} onSubmit={(values, formikHelpers) => {
@@ -60,28 +47,25 @@ function Login() {
                         <Form>
                             <Box marginBottom={2}>
                                 <FormGroup>
-                                    <Field name="email" as={TextField} label="Email" />
-                                    <ErrorMessage name="email">
+                                    <Field name="fullName" as={TextField} label="Name" />
+                                    <ErrorMessage name="fullName">
                                         {msg => <div style={{ color: 'red' }}>{msg}</div>}
                                     </ErrorMessage>
                                 </FormGroup>
-                            </Box>
-                            <Box marginBottom={2}>
+                                <Box marginBottom={2}>
                                 <FormGroup>
-                                    <Field name="password" as={TextField} label="Password" type="password" />
-                                    <ErrorMessage name="password">
-                                        {msg => <div style={{ color: 'red' }}>{msg}</div>}
-                                    </ErrorMessage>
+                                    <Field name="email" as={TextField} label="Description" />
                                 </FormGroup>
                             </Box>
-
-                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Login</Button>
+                            </Box>
+                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>save</Button>
                         </Form>
                     )}
                 </Formik>
+             
             </CardContent>
         </Card>
     );
 }
 
-export default Login;
+export default mangeProfile;

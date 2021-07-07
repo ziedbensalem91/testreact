@@ -12,4 +12,6 @@ export interface ProfileDetails {
     passwordConfirmation: string;
 
     email: string;
+
+    showPassword: string;
   }

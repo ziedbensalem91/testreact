@@ -7,6 +7,7 @@ import ForgetPassword from "./ForgetPassword";
 import Crud from "./Crud";
 import CreateCustomer from "./CreateCustomer";
 import EditCustomer from './EditCustomer';
+import ProfileSetting from './ProfileSetting';
 const Home = () => {
   return (
     <div>
@@ -29,7 +30,8 @@ const App = () => {
         <Link to="/Crud">List of Customers</Link>
         <br />
         <Link to={'/create'}> Create Customer </Link>
-
+        <br />
+        <Link to={'/ProfileSetting'}> Profile </Link>
       </div>
 
       <Switch>
@@ -47,6 +49,9 @@ const App = () => {
         </Route>
         <Route path="/create" exact>
           <CreateCustomer/>
+        </Route>
+        <Route path="/profileSetting" exact>
+          <ProfileSetting/>
         </Route>
         <Route path={'/edit/:id'} exact component={EditCustomer} />
       </Switch>
