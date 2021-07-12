@@ -8,6 +8,8 @@ import Crud from "./Crud";
 import CreateCustomer from "./CreateCustomer";
 import EditCustomer from './EditCustomer';
 import ProfileSetting from './ProfileSetting';
+import AppBar from './AppBar';
+
 const Home = () => {
   return (
     <div>
@@ -32,6 +34,8 @@ const App = () => {
         <Link to={'/create'}> Create Customer </Link>
         <br />
         <Link to={'/ProfileSetting'}> Profile </Link>
+        <br />
+        <Link to={'/AppBar'}> AppBar </Link>
       </div>
 
       <Switch>
@@ -52,6 +56,9 @@ const App = () => {
         </Route>
         <Route path="/profileSetting" exact>
           <ProfileSetting/>
+        </Route>
+        <Route path="/AppBar" exact>
+          <AppBar/>
         </Route>
         <Route path={'/edit/:id'} exact component={EditCustomer} />
       </Switch>

@@ -22,7 +22,7 @@ const initialValues: ProfileDetails = {
 };
 
 export function Register() {
-  
+
   const [values, setValues] = React.useState({
     password: "",
     showPassword: false,
@@ -36,13 +36,23 @@ export function Register() {
     setValues({ ...values, showPassword: !values.showPassword })
   }
 
-  
+
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
   }
 
-  
+  const handleClickShowPasswordConfirmation = (): void => {
+    setValues({ ...values, showPassword: !values.showPassword })
+  }
+
+
+
+  const handleMouseDownPasswordConfirmation = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    event.preventDefault()
+  }
+
+
   return (
     <Card>
       <CardContent>
@@ -91,48 +101,58 @@ export function Register() {
                 <FormGroup>
                   <Field name="fullName" as={TextField} label="Full Name" />
                   <ErrorMessage name="fullName">
-                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                    {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                 </FormGroup>
               </Box>
-
-
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="email" as={TextField} label="Email" />
                   <ErrorMessage name="email">
-                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                    {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                 </FormGroup>
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
                   <Field name="password" as={TextField} label="Password" type={values.showPassword ? "text" : "password"}
-        //onChange={handleChange("password")}
-        value={values.password}
-
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-            <IconButton
-              onClick={handleClickShowPassword}
-              onMouseDown={handleMouseDownPassword}
-            >
-        {values.showPassword ? <Visibility /> : <VisibilityOff />}
-            </IconButton>
-          </InputAdornment>
-          )}} />
-        
+                    //onChange={handleChange("password")}
+                    value={values.password}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                          >
+                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }} />
                   <ErrorMessage name="password">
-                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                    {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                 </FormGroup>
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="passwordConfirmation" as={TextField} label="Password Confirmation" type="password" />
+                  <Field name="passwordConfirmation" as={TextField} label="Password Confirmation" type={values.showPassword ? "text" : "password"}
+                    value={values.passwordConfirmation}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={handleClickShowPasswordConfirmation}
+                            onMouseDown={handleMouseDownPasswordConfirmation}
+                          >
+                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                          </IconButton>
+                        </InputAdornment>
+                      )
+                    }} />
                   <ErrorMessage name="passwordConfirmation">
-                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                    {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                 </FormGroup>
               </Box>
@@ -143,7 +163,7 @@ export function Register() {
                     label="Accept terms and conditions"
                   />
                   <ErrorMessage name="acceptedTermsAndConditions">
-                  { msg => <div style={{ color: 'red' }}>{msg}</div> }
+                    {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
                 </FormGroup>
               </Box>
