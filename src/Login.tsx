@@ -1,15 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLabel, FormGroup, MenuItem, TextField, Typography } from '@material-ui/core';
-import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
-import { array, boolean, mixed, number, object, string } from 'yup';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
+import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLabel, FormGroup, MenuItem, TextField, Typography } from '@material-ui/core';
+
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import { ProfileDetails } from './ProfileDetails';
+import { array, boolean, mixed, number, object, string } from 'yup';
+import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
 import IconButton from "@material-ui/core/IconButton";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-
 const initialValues: ProfileDetails = {
     fullName: '',
     email: '',
@@ -19,29 +29,65 @@ const initialValues: ProfileDetails = {
     acceptedTermsAndConditions: false
 
 };
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="https://material-ui.com/">
+                Your Website
+      </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
 
-function Login() {
+export default function Login() {
+    const classes = useStyles();
     const [values, setValues] = React.useState({
         password: "",
         showPassword: false,
-      });
-    
+    });
+
     const handleClickShowPassword = (): void => {
         setValues({ ...values, showPassword: !values.showPassword })
-      }
-    
-    
-    
-      const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
-        event.preventDefault()
-      }
-    
-    return (
-        <Card>
-            <CardContent>
-                <Typography variant="h4">Login</Typography>
+    }
 
+
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>): void => {
+        event.preventDefault()
+    }
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                    Sign in
+        </Typography>
                 <Formik
                     validationSchema={
                         object({
@@ -77,44 +123,59 @@ function Login() {
                     }}>
                     {({ values, errors, isSubmitting, isValidating }) => (
                         <Form>
-                            <Box marginBottom={2}>
-                                <FormGroup>
-                                    <Field name="email" as={TextField} label="Email" />
-                                    <ErrorMessage name="email">
-                                        {msg => <div style={{ color: 'red' }}>{msg}</div>}
-                                    </ErrorMessage>
-                                </FormGroup>
-                            </Box>
-                            <Box marginBottom={2}>
-                                <FormGroup>
-                                    <Field name="password" as={TextField} label="Password" type={values.showPassword ? "text" : "password"}
-                    //onChange={handleChange("password")}
-                    value={values.password}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <IconButton
-                            onClick={handleClickShowPassword}
-                            onMouseDown={handleMouseDownPassword}
-                          >
-                            {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                          </IconButton>
-                        </InputAdornment>
-                      )
-                    }} />
-                                    <ErrorMessage name="password">
-                                        {msg => <div style={{ color: 'red' }}>{msg}</div>}
-                                    </ErrorMessage>
-                                </FormGroup>
-                            </Box>
 
-                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Login</Button>
+                            <Field variant="outlined" fullWidth
+                                margin="normal" name="email" as={TextField} label="Email" />
+                            <ErrorMessage name="email">
+                                {msg => <div style={{ color: 'red' }}>{msg}</div>}
+                            </ErrorMessage>
+                            <Field name="password" as={TextField} label="Password" variant="outlined" fullWidth margin="normal" type={values.showPassword ? "text" : "password"}
+                                //onChange={handleChange("password")}
+                                value={values.password}
+                                InputProps={{
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    )
+                                }} />
+                            <ErrorMessage name="password">
+                                {msg => <div style={{ color: 'red' }}>{msg}</div>}
+                            </ErrorMessage>
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary" />}
+                                label="Remember me"
+                            />
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Sign In
+          </Button>
+                            <Grid container>
+                                <Grid item xs>
+                                    <Link href="/ForgetPassword" variant="body2">
+                                        Forgot password?
+              </Link>
+                                </Grid>
+                                <Grid item>
+                                    <Link href="/Register" variant="body2">
+                                        {"Don't have an account? Sign Up"}
+                                    </Link>
+                                </Grid>
+                            </Grid>
                         </Form>
                     )}
                 </Formik>
-            </CardContent>
-        </Card>
+            </div>
+        </Container>
     );
 }
-
-export default Login;
