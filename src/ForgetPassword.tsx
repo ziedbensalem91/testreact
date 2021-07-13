@@ -1,11 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLabel, FormGroup, MenuItem, TextField, Typography } from '@material-ui/core';
-import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
+import Avatar from '@material-ui/core/Avatar';
 
-import { array, boolean, mixed, number, object, string } from 'yup';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+
+import { Box, Button, Card, CardContent, Checkbox, CheckboxProps, FormControlLabel, FormGroup, MenuItem, TextField, Typography } from '@material-ui/core';
+
+import Link from '@material-ui/core/Link';
+import Grid from '@material-ui/core/Grid';
+
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import { ProfileDetails } from './ProfileDetails';
-import * as Yup from 'yup';
+import { array, boolean, mixed, number, object, string } from 'yup';
+import { ErrorMessage, Field, Form, Formik, useField } from 'formik';
+import IconButton from "@material-ui/core/IconButton";
+import Visibility from "@material-ui/icons/Visibility";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 const initialValues: ProfileDetails = {
     fullName: '',
@@ -16,13 +29,47 @@ const initialValues: ProfileDetails = {
     acceptedTermsAndConditions: false
 
 };
-
-function ForgetPassword() {
+function Copyright() {
     return (
-        <Card>
-            <CardContent>
-                <Typography variant="h4">Forget Password</Typography>
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="https://material-ui.com/">
+                Your Website
+      </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
 
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+function ForgetPassword() {
+    const classes = useStyles();
+
+
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <div className={classes.paper}>
+
+                <Typography component="h1" variant="h5">
+                    Forget password
+        </Typography>
                 <Formik
                     validationSchema={
                         object({
@@ -58,20 +105,32 @@ function ForgetPassword() {
                     }}>
                     {({ values, errors, isSubmitting, isValidating }) => (
                         <Form>
-                            <Box marginBottom={2}>
-                                <FormGroup>
-                                    <Field name="email" as={TextField} label="Email" />
-                                    <ErrorMessage name="email">
-                                        {msg => <div style={{ color: 'red' }}>{msg}</div>}
-                                    </ErrorMessage>
-                                </FormGroup>
-                            </Box>
-                            <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Send password reset link</Button>
+
+                            <Field variant="outlined" fullWidth
+                                margin="normal" name="email" as={TextField} label="Email" />
+                            <ErrorMessage name="email">
+                                {msg => <div style={{ color: 'red' }}>{msg}</div>}
+                            </ErrorMessage>
+
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                            >
+                                Send password reset link
+          </Button>
+                            <Grid container>
+
+
+                            </Grid>
                         </Form>
                     )}
                 </Formik>
-            </CardContent>
-        </Card>
+            </div>
+
+        </Container>
     );
 }
 

@@ -9,8 +9,13 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Visibility from "@material-ui/icons/Visibility";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Input from "@material-ui/core/Input";
-
+import Link from '@material-ui/core/Link';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Avatar from '@material-ui/core/Avatar';
+import Grid from '@material-ui/core/Grid';
 const initialValues: ProfileDetails = {
   fullName: '',
   email: '',
@@ -20,6 +25,39 @@ const initialValues: ProfileDetails = {
   acceptedTermsAndConditions: false
 
 };
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 export function Register() {
 
@@ -51,12 +89,19 @@ export function Register() {
   const handleMouseDownPasswordConfirmation = (event: React.MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault()
   }
-
+  const classes = useStyles();
 
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h4" >Register</Typography>
+   
+      <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
 
         <Formik
           validationSchema={
@@ -99,7 +144,7 @@ export function Register() {
             <Form autoComplete="off">
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="fullName" as={TextField} label="Full Name" />
+                  <Field name="fullName" as={TextField} label="Full Name" variant="outlined" fullWidth />
                   <ErrorMessage name="fullName">
                     {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
@@ -107,7 +152,7 @@ export function Register() {
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="email" as={TextField} label="Email" />
+                  <Field name="email" as={TextField} label="Email" variant="outlined" fullWidth/>
                   <ErrorMessage name="email">
                     {msg => <div style={{ color: 'red' }}>{msg}</div>}
                   </ErrorMessage>
@@ -115,7 +160,7 @@ export function Register() {
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="password" as={TextField} label="Password" type={values.showPassword ? "text" : "password"}
+                  <Field name="password" as={TextField} label="Password" type={values.showPassword ? "text" : "password"} variant="outlined" fullWidth
                     //onChange={handleChange("password")}
                     value={values.password}
                     InputProps={{
@@ -137,7 +182,7 @@ export function Register() {
               </Box>
               <Box marginBottom={2}>
                 <FormGroup>
-                  <Field name="passwordConfirmation" as={TextField} label="Password Confirmation" type={values.showPassword ? "text" : "password"}
+                  <Field name="passwordConfirmation" as={TextField} label="Password Confirmation" type={values.showPassword ? "text" : "password"} variant="outlined" fullWidth
                     value={values.passwordConfirmation}
                     InputProps={{
                       endAdornment: (
@@ -167,12 +212,21 @@ export function Register() {
                   </ErrorMessage>
                 </FormGroup>
               </Box>
-              <Button variant="contained" color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Register</Button>
+              <Button    fullWidth
+            variant="contained"
+            color="primary" type="submit" style={{ margin: '0 auto', display: 'block' }} disabled={isSubmitting || isValidating}>Register</Button>
+            <Grid container justifyContent="flex-end">
+            <Grid item>
+              <Link href="/Login" variant="body2">
+                Already have an account? Sign in
+              </Link>
+            </Grid>
+          </Grid>
             </Form>
           )}
         </Formik>
-      </CardContent>
-    </Card>
+        </div>
+  </Container>
   );
 }
 
